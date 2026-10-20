@@ -2,6 +2,56 @@
 
 Decisions and end-of-session recaps, newest first.
 
+## 2026-10-20 (school backpacks, coat hangers, every line voiced)
+- Ethan imported `school-backpack_roblox.glb`; set up as `Assets.SchoolBackpack`..`_5`, old Backpack..Backpack_6 moved to AssetBackups. His `coat hanger` model (was floating in Workspace) is now `Assets.CoatHanger`. Bags are placed against walls, under desks and on coat hangers. Commits `815ed0e`, `26e8a1c`. Details: [[Systems/Assets]].
+- Ethan: every voice line must have audio; PA voice for normal lines, a creepier glitchy voice for creepy ones. The phone call and the private PA scare were text only. New `tools/make_voices.py`, packs `PAVoiceExtra` + `CreepyVoice`, `Shared/Voice.luau`. Commit `423ecf5`. Details: [[Systems/Voice]].
+- **Ethan must upload** `sounds/PAVoiceExtra.ogg` and `sounds/CreepyVoice.ogg` and the ids go in `Config.Sounds.PAVoiceExtra` / `CreepyVoice` (silent until then, no errors).
+- Studio restarted twice this session (studio_id changed each time); everything had been saved.
+- Known console noise: asset 6160151677 "not authorized" = the backup Classic Radio in ServerStorage.AssetBackups (unused).
+- Delete permission granted for the project + vault folders this session; stale git .lock files cleaned out.
+
+## 2026-10-20 (Schooler/Library scripts into Git)
+- Ethan: "Add to git". Exported SchoolerService, LibraryBuilder, LibraryService, SchoolerFx, LibraryFx and Studio's DevService to `src` (written from `execute_luau` output, then hash + length checked against Studio for each file: all six matched). Commit `226f2d5`.
+- Method that worked: return `HASH path hash len` lines plus the sources from `execute_luau`, write each with a quoted heredoc in `device_bash`, compare the `x=(x*31+byte)%2147483647` hash in python. Studio source ends with a trailing newline (keep it).
+- `git commit -- <paths>` fails for untracked files: `git add -- <paths>` and `git commit -- <paths>` in the same command, then move the leftover `.lock` files aside (HEAD.lock, next-index-*.lock, objects/maintenance.lock).
+- Session setup: Studio MCP connected (studio_id from `list_roblox_studios`); Blender MCP tools load but Blender must be running with its add-on server (port 9876) first.
+
+## 2026-10-20 (first-time tutorial)
+- New TutorialService (server) + TutorialController (client). Plays once, the first time a player is in Wing 1; finishing or skipping saves `TutorialDone` in DataStore "PlayerFlags_v1" (key u_<UserId>). [H] replays it any time. In Studio it needs Game Settings > Security > Studio API access, otherwise it shows every Studio session.
+- 11 short cards (8-year-old wording) at the top of the screen: welcome, flashlight (press F twice), batteries (ring on the meter, charger glows, R), journal (Tab), turn a page, close journal, chores (tools + custodian sign glow, E), next wing (exit doors glow), sanity x2 (sanity board glows), ready (H). Try-it cards wait for the action; others have NEXT / Enter. "Skip tutorial" bottom-left.
+- While anyone is in the tutorial (ReplicatedStorage.TutorialActive) the school pauses: no menace, no Closer arrival, no blackout start, no scares. Flashlight battery doesn't drain during it and is topped up on the first run.
+- Journal: held closer so it fills most of the screen; hotbar and held item hide while it's open; bottom-right key list (Click/→ next, Right-click/← back, Tab close) above the battery meter.
+
+## 2026-10-20 (Closer arrives later)
+- Ethan: the Night Custodian came in too fast. First arrival now needs menace >= 40 (was 30) AND at least `Closer.ArriveAfterSeconds` into the wing: 150 s on Wing 1, blending to 75 s on Wing 8. Dev spawn and the key hunt still bring it in immediately.
+
+## 2026-10-20 (cleanup pass)
+- Gym exit doors: no chains or padlock any more. Flags removed from rooms. Only one thermostat per wing (beside the first classroom door).
+- Blackout now also kills "powered props" (LightFx powerProps): lights, emissive SurfaceAppearances and neon parts in the wing outside the Lights folder go dark and come back with the power. The exit sign is exempt (emergency battery). Covers the vending machines (VendingMachine_3 asset: SpotLight, SurfaceLight, emissive Body/Snacks/Int).
+- Graffiti: spots are rejected if anything visible stands in front of the tag; hall tags sit at 9.4 high; no black paint colour.
+- Schooler: never spawns in Wing 1 (SchoolerService.NewWing). Dev menu has "Spawn the Closer" / "Spawn the Schooler" (new SchoolerService.DevSpawn + DevService schooler_spawn).
+- Note: SchoolerService, LibraryService and the other Schooler/library scripts exist only in Studio, not in src. Commit `32dd8b5`.
+
+## 2026-10-20 (gym doors)
+- The chained gym doors at the end of the back hall now use Assets.ExitDoors (same model as the wing exit), welded to the invisible GymDoors part so the Closer's entry rattle still shakes them; two crossed chains + a brass padlock in front of the push bars.
+
+## 2026-10-20 (evening: bug pass + glossy look)
+- End walls of the main and back halls now carry the lower paint band, chair rail and baseboard (they were bare plaster).
+- Hallway clutter keeps 5 studs apart per side (wet floor signs were spawning inside each other).
+- Removed two leftovers sitting at the hall start in Workspace: a copy of the Schooler and "Closer New Model" (the A-frame "ladder"). Both moved to ServerStorage.AssetBackups; the backup Schooler is renamed so SchoolerService's name search can't pick it.
+- Bathroom graffiti moved to the door wall facing into the room (it was over the mirrors). Graffiti task: remaining paint tints every dirty cell, cells under 0.3 count as clean.
+- Glossy look: generated MaterialVariants GlossyVinylTile1 (CeramicTiles, 8 studs/tile, diagonal tile grid) and GlossyPaintedPlaster (Plaster, 16 studs/tile), applied everywhere with MaterialService:SetBaseMaterialOverride (no code). Lighting.EnvironmentSpecularScale 0.2 -> 1, EnvironmentDiffuseScale 0.15 -> 0.25. Lives in the place file (save it). Commit `a9c3a97`.
+
+## 2026-10-20 (afternoon: 17-point chore pass)
+- Every interact prompt is now a custom horror plate (PromptUi): steel key cap, typewriter text, blood fill while holding. Drawn on a ScreenGui (BillboardGuis didn't show up).
+- Mop a spill is physical: carry the mop (custodian room), hold left click by the puddle ~7 s (server-timed, puddle shrinks).
+- Broom/vacuum/plunger/mop animate (ToolAnim). Root cause of the bad grips: Items.make set a PrimaryPart, which threw away the asset pivot; long tools now keep it (`KeepPivot`). Drops snap to the floor.
+- Plunger: side skill check (3-5 hits), world stays visible. Thermostat: click up from cold to 68. Valve and breaker-box wires redrawn. Rewire swaps in the old breaker box asset.
+- Phone: last question creepy only 25%. School name now on a plaque by the Principal's notice ("DAWNRIDGE HIGH SCHOOL, Est. 1962") and the notice is signed "Principal, Dawnridge High".
+- Clocks name their rooms; dead-light prompts only show when you look at the fixture; "hold the ladder" taken out of the mix (code kept).
+- Fixes: whiteboard said DONE early; graffiti was 1 stud inside the bathroom wall; camera feed was inside the camera housing (new SecurityCamera asset, pivot at the lens).
+- Commit `75fc4b4`. Details: [[Systems/Chores]], [[Systems/UI]], [[Systems/Inventory]].
+
 ## 2026-10-20 (night: the Night Custodian is the Closer)
 - Imported the Night Custodian into Studio (3D Importer, PBR textures + eye emissive) and made it the Closer. Old model backed up.
 - Blender clips played in code (CloserAnims + CloserSkin). Low-sanity players (<25) see it crawl. New face jumpscare. Creepy voice + chase scream.

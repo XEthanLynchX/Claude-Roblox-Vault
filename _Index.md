@@ -19,6 +19,7 @@ New conversation? Read [[Handoff]] first: current state, how Claude works on the
 
 ## Design
 - [[Design/Decisions]]: every settled decision (rules, scope, money, launch). Read this first.
+- [[Systems/Chores]]: how every chore plays now
 - [[Design/Core Loop]]: chores, key, pressure, sanity
 - [[Design/Objective Brainstorm]]: why chores became the main objective
 - [[Design/Scares]]: private scares (formerly anomalies)
@@ -32,6 +33,7 @@ New conversation? Read [[Handoff]] first: current state, how Claude works on the
 - [[Systems/UI]]: the UI look (palette, task screens, HUD gauges) and UiTheme
 - [[Systems/Inventory]]: the 3-slot hotbar (items, flashlight slot, drop)
 - [[Systems/Assets]]: how to swap in real 3D models (asset slot names, placement rules)
+- [[Systems/Voice]]: every voice line, the three voice packs, normal vs creepy voice
 - [[Systems/Lighting]]: ceiling light pools, flashlight beam, join fade
 - [[Systems/Performance]]: measuring FPS, shadow budget, prop lightening, heavy assets
 

@@ -1,6 +1,6 @@
 # Handoff
 
-Read this first when picking the project up in a new conversation. Updated 2026-10-19 (afternoon: hotbar + new chores).
+Read this first when picking the project up in a new conversation. Updated 2026-10-20 evening (after the first-time tutorial).
 Then read [[_Index]] (rules), [[Tasks]] and the newest entries in [[Log]].
 
 ## Where things are
@@ -26,79 +26,52 @@ Then read [[_Index]] (rules), [[Tasks]] and the newest entries in [[Log]].
 - **Clean up previews:** always remove `__Preview`, `__Beam` and `__Tmp`, and restore Lighting and the camera, before a playtest. They get copied into the playtest otherwise.
 - **Checking code:** there is no luau-compile. A playtest with no errors in the console is the check. The ignorable noise is:
   - UIBlox FoundationProvider warnings;
-  - asset 203785492 "type does not match".
+  - asset 203785492 "type does not match";
+  - asset 6160151677 "not authorized" (the unused backup Classic Radio in AssetBackups).
 - **Git from the device shell:**
   - Deleting isn't allowed there, so git leaves `.lock` files behind. Move them aside: `mv .git/HEAD.lock .git/stale-HEAD-<time>`.
   - End commit messages with the Co-Authored-By and Claude-Session lines.
 - **Studio FPS is not real FPS.** In a Studio playtest, server + client + editor share one process, so it sits at about 34 FPS even with the map deleted. Real numbers come from the Roblox player: Shift+F5 for frame stats, Ctrl+F6 for the microprofiler.
-- **Ethan's standing rule:** anything relevant goes into this vault, every time.
+- **Ethan's standing rules:** anything relevant goes into this vault, every time. Never use low-poly assets. Prefer the Roblox Studio MCP over computer use; Ethan does model imports himself.
+- **Studio MCP notes (2026-10-20):**
+  - The studio_id changes when Studio restarts: call `list_roblox_studios` first.
+  - Script edits only work in Edit mode, so stop the playtest first. For big edits, string-replace `.Source` with `execute_luau` (plain `string.find`); `multi_edit` chokes on long payloads.
+  - `screen_capture` does work during a playtest now (Client view).
+  - `user_mouse_input` actions are `moveTo` / `mouseButtonClick` (mouse_button "left"); `instance_path` like `LocalPlayer.PlayerGui.Tutorial.Holder.Card.Skip` is reliable, raw x/y is not. Give buttons unique names so paths resolve.
+  - Requiring a controller from `execute_luau` gives a separate module instance (not the running one).
+  - The Studio DataStore fails unless Game Settings > Security > Studio API access is on.
+- **Exporting Studio code to `src`:** return `HASH <path> <hash> <len>` lines plus `@@FILE path@@BEGIN@@source@@END@@` blocks from `execute_luau` (keep it under ~100k chars per call), parse the saved tool-result in the container, check the hash (`x=(x*31+byte)%2147483647`), then `device_commit_files` with force. Commit in ONE git command with explicit paths (`git commit -F - -- <paths>`); a separate `git add` leaves an `index.lock`. Move stale `.lock` files aside before and after.
+- **Other people edit Studio at the same time** (Ethan, his friend, other Claude sessions). Make targeted edits only; never overwrite a whole script you didn't just read.
 
-## Current state (as of 2026-10-19)
-- **Playable loop exists:**
-  - chores and the wing key;
-  - the Closer AI (menace phases, hunting, lockers to hide in);
-  - private scares and sanity;
-  - blackouts and the breaker;
-  - flashlight with batteries;
-  - music players and the journal.
-- **Lighting** (see [[Systems/Lighting]]):
-  - ceiling fixtures throw floor pools from a SpotLight called `Pool`;
-  - all values live in `Config.Lighting` and can be tuned live during a playtest through `ReplicatedStorage.LightingTuning`;
-  - a low graphics mode switches on automatically below quality 6 (no shadows there).
-- **Performance** (see [[Systems/Performance]]):
-  - only the 5 nearest lights cast shadows;
-  - lights past 130 studs switch off;
-  - small props don't cast shadows;
-  - Bookshelf_2 is merged into 3 parts;
-  - Desk_2 spawns at weight 0.3.
-- **Flashlight:** both the first-person flashlight and the one in characters' hands use the imported model (`Assets.Flashlight`, built by `src/shared/FlashlightModel.luau`).
-- **School identity:** "Dawnridge High, Home of the Smiles".
-- **Last commits:**
-  - `0cb5333`: flashlight model and weighted variants;
-  - `eaea53d`: Ethan's "changes";
-  - `bc6831a`: performance pass.
+## Current state (as of 2026-10-20 evening)
+- **Last commit:** `423ecf5` every spoken line voiced. Before it: `26e8a1c` + `815ed0e` school backpacks / coat hangers, `226f2d5` Studio-only Schooler/Library scripts exported to src, `7bce176` first-time tutorial, `62faa73` Closer arrives later, `32dd8b5` cleanup pass (gym chains, flags, thermostat, vending blackout, dev spawns), `4f4129f` gym exit doors, `a9c3a97` bug pass + glossy look, `75fc4b4` 17-point chore pass, `61026a0` Night Custodian is the Closer.
+- **Playable loop:** chores and the wing key, the Closer (Night Custodian model, menace phases, hunting, lockers), the Schooler (second monster, never in Wing 1), private scares and sanity, blackouts and the breaker, flashlight with batteries, 3-slot hotbar, 3D journal, first-time tutorial.
+- **Tutorial (new, 2026-10-20):** `TutorialService` (server) + `TutorialController` (client). Plays the first time a player is in Wing 1; finishing or skipping saves `TutorialDone` in DataStore `PlayerFlags_v1`; [H] replays it. 11 kid-friendly cards with HUD rings and world highlights. While it runs (`ReplicatedStorage.TutorialActive`) menace, Closer arrival, blackouts and scares pause and the flashlight doesn't drain. See [[Systems/UI]] and the newest [[Log]] entry.
+- **Journal:** held larger (fills most of the screen), hotbar + held item hide while open (`JournalOpen` attribute), bottom-right key hints.
+- **Closer timing:** first arrival needs menace >= 40 AND `Config.Closer.ArriveAfterSeconds` (150 s Wing 1 → 75 s Wing 8).
+- **Backpacks + voice (2026-10-20 evening):** school backpacks against walls / under desks / on coat hangers ([[Systems/Assets]]); every spoken line voiced, normal in the PA voice, creepy in a glitchy one ([[Systems/Voice]]).
+- **Look:** glossy materials via MaterialService overrides (CeramicTiles → GlossyVinylTile1, Plaster → GlossyPaintedPlaster) and `Lighting.EnvironmentSpecularScale` 1 / `EnvironmentDiffuseScale` 0.25. These live in the place file, not Git.
+- **Blackouts** also kill "powered props" (vending machines etc.) via `LightFx.powerProps`; the exit sign stays lit.
+- **Dev menu:** god, menace, closer pause, wing restart, give items, blackout, and "Spawn a monster" (Closer / Schooler).
 
-- **Added in the 2026-10-19 night session** (details: [[Log]] newest entry):
-  - DoorService: E opens/closes classroom doors; haunted doors slam/creak; the Closer shoves doors open.
-  - Client feel modules: PhantomSteps, ViewSway, Exertion (breathing asset 124723360946174), CloserGaze. FirstPersonBody exists but legs are OFF.
-  - The Closer is faster (chase 16-18, walk 8.5-10.5, always under the 20 sprint) and the jumpscare is immediate (0.02 s).
-  - Boys and Girls bathrooms in every wing; the custodian room was rebuilt with real supply models (the wing key rests on the first SupplyShelf).
-  - PA is infrequent (Config.PA) and no line uses the player's name.
-  - Lock-the-door chore removed.
-  - Imported assets now in use: WaterHeater, JanitorCart, Radio, SchoolLockers (per-bank colors, working hide animation), VendingMachine + VendingMachine_3 (soda machine removed), ExitSign, ToiletStall, Urinal, BathroomSink, SupplyShelf, BucketStack, MopBucket and other clutter, FireExtinguisher, WaterFountain.
+## Studio-only code: now in Git (2026-10-20 evening)
+- `SchoolerService`, `LibraryBuilder`, `LibraryService` (server), `SchoolerFx`, `LibraryFx` (client) and Studio's version of `DevService` (with `schooler_spawn`) were exported to `src` and committed as `226f2d5`. Every file's hash matched the Studio source.
+- A Rojo sync is now safe for these. Still true: any script edited only in Studio is overwritten by the next sync, so export after every change (see [[Systems/Conventions]]).
+- Not in Git, still only in the place file: `ReplicatedStorage.Assets`, `ServerStorage.AssetBackups`, `ServerStorage.Closer`, `ServerStorage.LibraryKit` and the Schooler model, Lighting properties, MaterialService overrides.
+- `models/school-backpack.glb` is untracked in the project folder (Ethan's file, left alone).
 
-- **Added 2026-10-19 afternoon** (details: [[Log]] newest entry, [[Systems/Inventory]]):
-  - 3-slot hotbar: 1/2/3 or wheel, G drops, flashlight is an item that only shines in hand; trash bags and the wing key are items.
-  - Office room in every wing: PA phone, security monitors, flashlight charger, master clock.
-  - 10 new chores: dead lights, co-op ladder, vacuum/broom, charger restock, cameras, graffiti, PA phone quiz, chairs up, plunger, clocks.
-  - Ethan's clock/plunger/broom/vacuum are Assets; all code is in Git (commit `d5f112e`); Studio and src matched exactly at the end of the session.
-  - Git delete permission was granted for the project folder this session, so commits no longer leave `.lock` files (re-request it in a new session).
-
-- **2026-10-19 evening:** horror UI (task screens, breath line, battery gauge, hotbar) committed as `52ebad5`. Studio and `src` matched exactly afterwards, so a Rojo sync is safe. See [[Systems/UI]].
+## What Ethan needs to do
+- **Upload `sounds/PAVoiceExtra.ogg` and `sounds/CreepyVoice.ogg`** (project folder) and give Claude the ids for `Config.Sounds.PAVoiceExtra` / `CreepyVoice`. Until then the phone call and the private PA scare stay silent. See [[Systems/Voice]].
+- **Save/publish the place** (tutorial scripts are in Git, but materials, assets and the Studio-only scripts above are only in the place).
+- Turn on **Game Settings > Security > Enable Studio Access to API Services**, or the tutorial shows every Studio session.
 
 ## Open items / next steps
-- **Night Custodian model** (evening 2026-10-19): modelled, rigged and animated in Blender (`models/NightCustodian.blend` / `.fbx`). Late evening: mop removed, realistic textures baked, Roblox-ready FBX + 1024 PBR maps in `models/textures`. **Done 2026-10-20:** it is now the Closer in Studio (commit `61026a0`); see [[Design/The Closer]]. Ethan must save the place (the model lives in ServerStorage, not in src). Not yet tested: multiplayer (two clients seeing different crawl states), hearing the new sounds in a real chase. See [[Systems/Night Custodian Model]].
-- **Save/publish the place** so the new assets (WallClock, Vacuum, Broom, Plunger, StepLadder, DeskPhone, CrtMonitor, BatteryBox, BulbBox, SecurityCamera) and the backdoor removals persist. Re-scan imports for scripts (`Runtime`, `ScreenBuilder`) after any reload.
-- **New chores need a real playtest, ideally with 2 players** (the ladder only appears with 2+; it couldn't be tested solo in Studio). Tune numbers in `Config.ChoreTuning` / `Config.Menace`.
-- **Held items' looks are unchecked:** Studio screenshots don't work during a playtest, so `Items.Defs` Hold (third person) and View (first person) offsets are first guesses. Ethan should look and say what's off. The vacuum Hold was raised once (it sank into the floor).
-- **The office layout hasn't been looked at in a screenshot** (Studio's viewport wasn't rendering at the end of the session). Placement was checked with numbers (phone/monitors on the desk tops, ladder on the floor, clock hands turning the right way).
-- **Decisions waiting on Ethan:** whether the stylized CleaningCaddy breaks the no-low-poly rule; whether to remove the username text from the 'open locker' scare; models for the remaining blocky custodian props (MopSink, TrashChute, BreakerPanel, SanityBoard, NoteBoard).
-- **Not fully verified:** locker-hide inner view (door see-through while hidden), sprint sway amount, exit sign in-game, new-wing timing.
-- **Unverified changes:**
-  - Real-player FPS at max settings hasn't been checked since the performance pass. Publish, join, check Shift+F5.
-  - The low-mode flashlight was dimmed (brightness 3, edge 0.6, throw 2) but Ethan hasn't confirmed it looks right.
-  - Studio's saved graphics quality reported manual level 1 in playtests. Ask Ethan if that's intended.
-- **Desk_2:** to restore its normal spawn rate, the real fix is in Blender (merge the basket rods into one mesh, then re-import). Unions would drop its texture.
-- **Offered, not yet requested:**
-  - switch the hallway banners ("GO TIGERS") and PA lines to Dawnridge branding;
-  - drop the brand-like backpacks (Backpack_2, Backpack_5) before publishing;
-  - move the Assets into Git as `.rbxm`;
-  - add `.gitattributes` and StyLua;
-  - find the bad asset id 203785492.
-- **Leftovers:** unused items still in the Workspace are AuxScene (The_Closer, Journal), a Journal and 3 Painting models. These paintings were cleaned of a Toolbox backdoor script earlier.
-- **Bigger roadmap:** see [[Tasks]]. Main items:
-  - the two-place setup (lobby + game);
-  - tuning the menace numbers;
-  - real sounds;
-  - revive and spectate;
-  - the first playable target is the end of October.
+- **Tutorial:** not yet tried with 2 players (one in the tutorial pauses the school for everyone; 10-minute safety stop). Mobile/gamepad: cards say "Press F / Tab"; touch players have no keyboard hints yet. ExitDoors highlight wasn't seen on screen in the test (it's far away; AlwaysOnTop should still show it).
+- **Playtests needed:** new chores with 2 players (ladder only spawns with 2+), menace/Closer tuning, the Schooler in Wings 2+, held-item looks in third person (vacuum still odd).
+- **Night Custodian:** multiplayer crawl states and chase sounds untested. See [[Systems/Night Custodian Model]].
+- **Decisions waiting on Ethan:** whether the stylized CleaningCaddy breaks the no-low-poly rule; remove username text from the 'open locker' scare?; models for blocky custodian props (MopSink, TrashChute, BreakerPanel, SanityBoard, NoteBoard).
+- **Unverified:** real-player FPS at max settings (publish, Shift+F5); low-mode flashlight brightness; Studio's saved graphics quality level 1.
+- **Desk_2:** real fix is in Blender (merge basket rods), then re-import.
+- **Offered, not yet requested:** Dawnridge branding for banners/PA; drop brand-like backpacks (Backpack_2, Backpack_5); Assets into Git as `.rbxm`; `.gitattributes` + StyLua; find bad asset id 203785492.
+- **Leftovers in Workspace:** AuxScene (The_Closer, Journal), a Journal and 3 Painting models; the old Schooler model backup renamed "School-head monster copy (was in Workspace at the hall start)".
+- **Bigger roadmap:** see [[Tasks]] (two-place lobby + game, real sounds, revive + spectate; first playable target end of October).

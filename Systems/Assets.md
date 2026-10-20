@@ -43,7 +43,8 @@ A slot can hold several models: name them `Desk`, `Desk_2`, `Desk_3`... Each pla
 | `WelcomeBanner` | "Welcome to Dawnridge High" banner on the main hall start wall | wall surface, centre |
 | `Easel` | easel with its canvas (one model, canvas side = front) | floor |
 | `Flask` (+ `_2`.. `_5`) | lab flasks on science benches (evenly spaced, never overlapping) | surface |
-| `Backpack` (+ `_2`.. `_6`) | backpacks: room clutter, lost & found table | floor |
+| `SchoolBackpack` (+ `_2`.. `_5`) | school backpacks (navy, red, forest, charcoal, teal): against walls, under desks, on coat hangers, hallway clutter, lost & found. Pivot bottom centre, front pocket -Z; attributes Height/Depth. Old `Backpack`..`_6` are in AssetBackups | floor (see `Props.Backpack` poses) |
+| `CoatHanger` | wall board with 5 hooks (Ethan's model, 16 white blocks). Pivot = middle of the board's back on the wall, -Z out; `Hook` Attachments on the wall plane, `HookReach` 0.7 | wall face |
 | `TrophyCase`, `VendingMachine`, `Bench`, `Bookshelf`, `Piano`, `Drum`, `Easel`, `LabBench`, `ComputerStation`, `Table`, `Chair`, `Stool`, `Globe`, `Flag`, `Plant`, `MusicStand` | furniture | floor |
 | `FireExtinguisher`, `BreakerPanel`, `SanityBoard` | wall fixtures | wall surface |
 | `Banner` | ceiling banner | its center |
@@ -52,7 +53,7 @@ A slot can hold several models: name them `Desk`, `Desk_2`, `Desk_3`... Each pla
 | `DeskPhone`, `CrtMonitor` | office front desk phone, security monitors (`Front` part = screen, attribute `Screen`) | desk surface |
 | `SecurityCamera` | CCTV camera at the start of each hall (lens looks -Z) | its centre |
 | `Broom`, `Vacuum`, `Plunger`, `BatteryBox`, `BulbBox` | hotbar tools / chore props (see [[Systems/Inventory]]) | floor |
-| `WetFloorSign`, `Backpack`, `ScatteredPapers`, `PaintSplat`, `JanitorCart`, `BucketStack`, `Ladder`, `WaterHeater` | clutter | floor |
+| `WetFloorSign`, `SchoolBackpack`, `ScatteredPapers`, `PaintSplat`, `JanitorCart`, `BucketStack`, `Ladder`, `WaterHeater` | clutter | floor |
 
 ## Importing GLBs with color
 Roblox Import 3D only keeps image textures, so models with plain material colors (Claude Design exports) import white.
@@ -90,3 +91,9 @@ Check every Toolbox model for scripts before using it. On 2026-10-18 the canvas,
 - ServerStorage.AssetBackups holds originals of edited assets (Bookshelf_2_Original, Flashlight_Import).
 
 - **ExitDoors** (2026-10-20): `models/school_exit_doors_roblox.glb` (colors baked by `tools/glb_colorize.py`). Only the double door is used: left door closed, scaled to 8.4 tall, pivot = floor at the back of the frame, front -Z (panic bars face the hall). WingBuilder hides the ExitDoor part (keeps prompt/sounds/collision) and welds the model to it so the arrival rattle still shakes it. Full import (single + double) kept in AssetBackups.
+
+## School backpacks (2026-10-20)
+- Source: `models/school-backpack.glb` (5 colour variants, 73 parts each). Colorized to `_roblox.glb`, imported by Ethan, split into `Assets.SchoolBackpack`..`_5`: stitch_* parts stripped (47 per bag, invisible in play; full originals in `ServerStorage.AssetBackups.school_backpacks (original import)`), scaled 3.3 studs/m (1.29 x 1.72 x 0.84 studs), Fabric material (zippers/adjusters Metal), tiny parts CastShadow off, never collide/query.
+- `Props.Backpack(parent, cf, rng, pose?, reach?)` poses: `floor` (slumped or lying), `wall` (standing, back to the wall; cf on the wall face, -Z out), `under` (lying under a student desk; cf = desk pivot), `hang` (cf = hook point). Clones are always named `Backpack` (ChoreService REMOVABLE).
+- `Props.CoatHanger` + `Props.coatHooks` + `Props.HangBackpacks` (never two bags on neighbouring hooks: the bags are wider than the hook spacing).
+- WingBuilder: coat hanger on the classroom rear wall by the door corner (standard 70%, computer lab 60%, art/science 50%), 1 in 4 student desks gets a bag under it, room clutter bags stand against the rear/window wall, half the hallway poster stretches become a coat-hook spot. Wing 1 test build: 37 bags, 7 hangers.
