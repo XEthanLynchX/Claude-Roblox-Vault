@@ -62,3 +62,5 @@
 - **Multiplayer saves:** the **host's slot** drives the run; everyone earns coins and achievements to their own profile.
 
 - **After death (2026-10-21, design only):** taken players spectate through the CCTV cameras, and every so often get a charge to scare their friends near the camera they watch. Written up in [[Design/After Death]]; nothing built yet. Confirmed 2026-10-21: taken = punishment, scares purely cosmetic (incl. a fake Closer jumpscare), no free rescue (revives purchase-only), room cameras too but the CCTV chore stays halls-only, no Closer scaling. Also: players always respawn with a flashlight (not built yet). Replaces the "ghost only one player sees" idea.
+
+- **Map (2026-10-21):** hallways are procedurally generated on a grid (turns, loops, short dead ends), about 1.5x the old map in halls and rooms; individual hall and room sizes unchanged. Hallways, bathrooms and their ceilings use the school-surfaces textures; classrooms unchanged. The library wing is switched off (files kept). See [[Systems/Map]].

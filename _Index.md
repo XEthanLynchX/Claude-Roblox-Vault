@@ -33,6 +33,7 @@ New conversation? Read [[Handoff]] first: current state, how Claude works on the
 - [[Systems/Night Custodian Model]]: the Blender model, rig and 4 animations of the Night Custodian
 - [[Systems/UI]]: the UI look (palette, task screens, HUD gauges) and UiTheme
 - [[Systems/Inventory]]: the 3-slot hotbar (items, flashlight slot, drop)
+- [[Systems/Map]]: generated grid hallways (wing layout rules) and the baked school surfaces
 - [[Systems/Assets]]: how to swap in real 3D models (asset slot names, placement rules)
 - [[Systems/Voice]]: every voice line, the three voice packs, normal vs creepy voice
 - [[Systems/Lighting]]: ceiling light pools, flashlight beam, join fade
