@@ -218,3 +218,4 @@ Decisions and end-of-session recaps, newest first.
 - Answered the After Death questions: punishment with cosmetic scares only (door slam, fake Closer jumpscare), no free rescue (revives purchase-only), room cameras for spectators but the CCTV chore stays halls-only, no Closer scaling. Updated [[Design/After Death]]. Still not implemented.
 - Added rule: players always respawn with a flashlight ([[Design/After Death]] decision 8). Not implemented.
 - Map rework: generated grid hallways, baked school surfaces (halls, bathrooms, ceilings), library wing off. Commit `a58c817`. [[Systems/Map]]
+- Classrooms got the classroom-floor-wall.glb look (speckled VCT floor, cream block walls, tan base, popcorn ceiling). [[Systems/Map]]

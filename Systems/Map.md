@@ -24,6 +24,7 @@ Built by `src/server/Services/WingBuilder.luau` (2026-10-21, commit `a58c817`). 
 - Uploaded by importing `models/school_surface_swatches.glb` (one plane per surface) with Import 3D; the texture ids are in `Config.Surfaces`.
 - **Scripts can't set MaterialVariant maps**, so the variants (`SchoolHallVCT`, `SchoolHallBorder`, `SchoolHallCMU`, `SchoolPopcorn`, `SchoolBathFloor`, `SchoolBathWall`) live in MaterialService in the place file. `require(ReplicatedStorage.Shared.Surfaces).ensure()` from the command bar / Studio MCP (edit mode) recreates them from Config. `Surfaces.apply(part, name, tint?)` does nothing if a variant is missing (old plain look).
 - Used on: hall floors (VCT, navy border strip), hall walls / end walls / posts / door headers (block wall + oak chair rail at 3.5 + navy rubber base), hall and bathroom ceilings (popcorn), bathroom floor and wall tile (white glazed tile + a band in the room colour). Classrooms unchanged.
+- **Classrooms (2026-10-21, from `models/classroom-floor-wall.glb`):** speckled VCT floor with coloured accent tiles (`SchoolClassVCT`, 28 studs per repeat = 24 x 24 tiles), cream painted block on all four walls incl. the inside of the door wall (`SchoolClassCMU`), tan rubber base with a brown cap, popcorn ceiling. Uploaded via `models/classroom_surface_swatches.glb`. Office, custodian room and bathrooms keep their own walls. Themed rooms that lay their own floor (carpet etc.) still show it.
 - Bathroom floor overlay is CanCollide false: as a 0.05 step it blocked the Closer's pathfinding into bathrooms.
 
 ## Testing notes
