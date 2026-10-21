@@ -35,6 +35,7 @@ New conversation? Read [[Handoff]] first: current state, how Claude works on the
 - [[Systems/Inventory]]: the 3-slot hotbar (items, flashlight slot, drop)
 - [[Systems/Map]]: generated grid hallways (wing layout rules) and the baked school surfaces
 - [[Systems/Assets]]: how to swap in real 3D models (asset slot names, placement rules)
+- [[Systems/Music]]: the score layers, the PA waltz from the ceiling speakers, the HuntDread chase
 - [[Systems/Voice]]: every voice line, the three voice packs, normal vs creepy voice
 - [[Systems/Lighting]]: ceiling light pools, flashlight beam, join fade
 - [[Systems/Performance]]: measuring FPS, shadow budget, prop lightening, heavy assets

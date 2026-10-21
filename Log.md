@@ -221,3 +221,4 @@ Decisions and end-of-session recaps, newest first.
 - Classrooms got the classroom-floor-wall.glb look (speckled VCT floor, cream block walls, tan base, popcorn ceiling). [[Systems/Map]]
 - Dimmer hallway lights (half of room lights), thicker dark fog and smaller dark-adjust glow so you see less far in the dark. [[Systems/Lighting]]
 - Fake chores removed (FakeSpill out of the scare pool). Commit `8d9b9ef`.
+- New music: PAWaltz (old record through ceiling PA speakers) and HuntDread chase. Commits `5b3e9fc`, `0c284be`. [[Systems/Music]]
