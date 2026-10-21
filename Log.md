@@ -222,3 +222,4 @@ Decisions and end-of-session recaps, newest first.
 - Dimmer hallway lights (half of room lights), thicker dark fog and smaller dark-adjust glow so you see less far in the dark. [[Systems/Lighting]]
 - Fake chores removed (FakeSpill out of the scare pool). Commit `8d9b9ef`.
 - New music: PAWaltz (old record through ceiling PA speakers) and HuntDread chase. Commits `5b3e9fc`, `0c284be`. [[Systems/Music]]
+- Flashlight stutters when aimed at the Closer; the 3 lights nearest it go dark. Commit in project log. [[Design/The Closer]]

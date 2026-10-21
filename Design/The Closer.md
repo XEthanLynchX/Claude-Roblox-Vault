@@ -127,3 +127,7 @@ Replaced the fixed timer + coin flips with an "AI director" (Alien: Isolation / 
 - **Crawling is per player:** if YOUR sanity is under `Config.Closer.CrawlSanity` (25) you see it crawl (slow) or scuttle (CrawlRun) on all fours; everyone else sees it walk / run.
 - **Jumpscare:** its face is shoved into the camera (face placed 1.25 studs away, then 0.8-1 between strobe frames), head tipped up and snapping, arms reaching, eyes burning (emissive x14), red face light + white flashes. HUD hidden during the scare. Its own scream + a bone crack layered on the old scream/hit/stinger.
 - **Voice** (Pro Sound Effects, in Config.Sounds): CloserScream1/2 when a chase starts, CloserShriek1/2 every 3.5-7 s while chasing, CloserGroan1/2 / Snarl / Crack1/2 every 4-9 s when idle and within 80 studs, CloserBreath when you're within 16 studs, joint cracks with crawl steps. All positional at its head, played by each client's copy.
+
+## Light and flashlight (2026-10-21)
+- **Flashlight stutters** when the beam is on its body (line of sight, within `Config.Flashlight.CloserFlickerRange` 75 studs, `CloserFlickerAngle` 6 deg slack): 45% chance per frame the beam cuts out, and it gutters (35-100% brightness) when on. In `client/Controllers/Flashlight.luau` (aimedAtCloser).
+- **Lights die around it:** `client/Controllers/CloserDarkness.luau` holds the 3 closest working ceiling lights within 28 studs of it off (LightFx "off" holds) and lets them come back on behind it. `Config.Closer.DarkLights` / `DarkLightsRange`. Verified in play: exactly the 3 nearest working lights dark.
