@@ -11,6 +11,7 @@ Replaces the old line "taken players return as ghosts only one living player can
 5. **No in-game rescue or free revive.** Revives are **only purchasable** (Robux; see [[Design/Decisions]]).
 6. Spectator cameras **include rooms** (not only halls). This must **not change the CCTV chore**, which stays **halls only**.
 7. The Closer does **not** get stronger when players are taken.
+8. **Whenever a player respawns (revive, next wing, any respawn) they always spawn with a flashlight** in their flashlight slot ([[Systems/Inventory]]). Not built yet; check how the current spawn/respawn gives the flashlight and make it unconditional.
 
 ## Why this fits
 - The CCTV chore (Monitor, [[Systems/Chores]]) and the security cameras (`SecurityCamera` asset, [[Systems/Assets]]) already exist, so a taken player is now the one watching the monitors.

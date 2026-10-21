@@ -216,3 +216,4 @@ Decisions and end-of-session recaps, newest first.
 ## 2026-10-21
 - Brainstormed what taken players do. Ethan chose: CCTV spectate + an occasional option to scare friends. Wrote [[Design/After Death]] (design only, not implemented, open questions listed).
 - Answered the After Death questions: punishment with cosmetic scares only (door slam, fake Closer jumpscare), no free rescue (revives purchase-only), room cameras for spectators but the CCTV chore stays halls-only, no Closer scaling. Updated [[Design/After Death]]. Still not implemented.
+- Added rule: players always respawn with a flashlight ([[Design/After Death]] decision 8). Not implemented.
