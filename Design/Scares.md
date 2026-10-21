@@ -5,7 +5,7 @@ Former "anomalies". No longer the objective: they are **private scares** that hi
 ## Rules
 - Most scares are **private**: only one player sees or hears them. Others see nothing.
 - Some are **shared** (everyone hears a locker slam) to keep the group on edge.
-- Low sanity → more private scares, plus **fake chores**.
+- Low sanity → more private scares. **No fake chores** (removed 2026-10-21, Ethan's call).
 - Some scares cost sanity; none directly kill (only the Closer kills).
 - Each is a module with `apply()` / cleanup (system already built; reuse it).
 
@@ -32,7 +32,8 @@ Former "anomalies". No longer the objective: they are **private scares** that hi
 - Footsteps matching yours, one beat late (P)
 - A chat bubble over a teammate saying something they never typed (P, later)
 
-## Fake chores (hallucinations)
+## Fake chores (hallucinations) — REMOVED 2026-10-21
+Ethan: no fake tasks on the chore list. The `FakeSpill` scare is out of ScareDirector's pool (module kept in `shared/Scares/FakeSpill.luau`). Notes below are history.
 - A spill only you see, in a room far from the group
 - A classroom on your lock list that doesn't exist
 - A trash bag that's heavier than it should be; it moves

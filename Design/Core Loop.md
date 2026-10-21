@@ -46,7 +46,7 @@ You can't move while doing one (you're exposed). W/A/S/D or X backs out; walking
 
 ## Hidden sanity
 - Drops: near the Closer, alone in the dark, experiencing scares, flashlight dead.
-- Low sanity → more private scares and **fake chores** (a spill or open door only you see).
+- Low sanity → more private scares. (Fake chores were removed 2026-10-21: nothing fake is ever added to the chore list.)
 - Shown only on the Staff Wellness Monitor in the custodian room. Elsewhere, hints: color loss, heavier breathing, footsteps out of sync.
 
 ## The Closer
