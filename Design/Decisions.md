@@ -61,4 +61,4 @@
 - **Saves:** persist which wing the player is on, with **3 save slots**.
 - **Multiplayer saves:** the **host's slot** drives the run; everyone earns coins and achievements to their own profile.
 
-- **After death (2026-10-21, design only):** taken players spectate through the CCTV cameras, and every so often get a charge to scare their friends near the camera they watch. Written up in [[Design/After Death]] with open questions; nothing built yet. Replaces the "ghost only one player sees" idea.
+- **After death (2026-10-21, design only):** taken players spectate through the CCTV cameras, and every so often get a charge to scare their friends near the camera they watch. Written up in [[Design/After Death]]; nothing built yet. Confirmed 2026-10-21: taken = punishment, scares purely cosmetic (incl. a fake Closer jumpscare), no free rescue (revives purchase-only), room cameras too but the CCTV chore stays halls-only, no Closer scaling. Replaces the "ghost only one player sees" idea.
