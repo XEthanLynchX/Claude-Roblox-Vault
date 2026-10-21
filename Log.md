@@ -2,6 +2,16 @@
 
 Decisions and end-of-session recaps, newest first.
 
+## 2026-10-20 (late: hiding fixes, smaller players, CCTV Closer)
+- Voice ids found in Ethan's inventory (search_asset scope user): PAVoiceExtra 88268153417320, CreepyVoice 84267249437395, now in Config.Sounds.
+- Lockers: player attribute `HidePose` = "Locker" once the door shuts; every other client hides that character (LocalTransparencyModifier) and its name.
+- Desks: `HidePose` = "Desk" while sat under a desk. Every client poses that character hugging its knees (client Hiding, PreSimulation, Motor6D or AnimationConstraint `.Transform`). Ethan's avatar uses AnimationConstraints, not Motor6Ds. On these joints +X tips a limb BACKWARDS (checked in a playtest). Root sits at 0.35 x root height; the hider's camera offset is Config.Hiding.DeskCameraY (-0.6). No more black vignette; the hint fades after 3 s.
+- Players scaled to Config.Characters.Scale = 0.8 (WingService `shrink`, Model:ScaleTo after the appearance loads). Hide glides use the real standing / sitting heights.
+- CCTV: every figure is the Night Custodian (clone of ReplicatedStorage.CloserVisual + CloserSkin.attach). "Figure" events = walks across; "Closer" events (35%) = stares 1.15 s, then leaps into the lens (CloserSkin Strike; shriek, flash, shake, SIGNAL LOST). Don't anchor the clone's parts: Strike moves only the root.
+- Found Studio-only edits in WingService, Movement, MusicPlayerService, MusicController (library / Schooler work) and exported them to src (per-line hash diff, then fetched only the differing lines).
+- Commit `149fc4a`.
+- Testing gotchas: requiring a service from execute_luau makes a second module instance, and Remotes.get then creates duplicate RemoteEvents (fire the original remote instead). user_keyboard_input didn't reach the game in this session (couldn't press E / C), so the real prompt-driven hide flow is untested; the hidden state, pose and camera were tested by setting them directly.
+
 ## 2026-10-20 (school backpacks, coat hangers, every line voiced)
 - Ethan imported `school-backpack_roblox.glb`; set up as `Assets.SchoolBackpack`..`_5`, old Backpack..Backpack_6 moved to AssetBackups. His `coat hanger` model (was floating in Workspace) is now `Assets.CoatHanger`. Bags are placed against walls, under desks and on coat hangers. Commits `815ed0e`, `26e8a1c`. Details: [[Systems/Assets]].
 - Ethan: every voice line must have audio; PA voice for normal lines, a creepier glitchy voice for creepy ones. The phone call and the private PA scare were text only. New `tools/make_voices.py`, packs `PAVoiceExtra` + `CreepyVoice`, `Shared/Voice.luau`. Commit `423ecf5`. Details: [[Systems/Voice]].

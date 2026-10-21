@@ -37,6 +37,7 @@ Then read [[_Index]] (rules), [[Tasks]] and the newest entries in [[Log]].
   - The studio_id changes when Studio restarts: call `list_roblox_studios` first.
   - Script edits only work in Edit mode, so stop the playtest first. For big edits, string-replace `.Source` with `execute_luau` (plain `string.find`); `multi_edit` chokes on long payloads.
   - `screen_capture` does work during a playtest now (Client view).
+  - `user_keyboard_input` didn't reach the game on 2026-10-20 (no E/C). Requiring a service from `execute_luau` creates duplicate RemoteEvents via Remotes.get; fire `ReplicatedStorage.Remotes.<name>` directly when testing.
   - `user_mouse_input` actions are `moveTo` / `mouseButtonClick` (mouse_button "left"); `instance_path` like `LocalPlayer.PlayerGui.Tutorial.Holder.Card.Skip` is reliable, raw x/y is not. Give buttons unique names so paths resolve.
   - Requiring a controller from `execute_luau` gives a separate module instance (not the running one).
   - The Studio DataStore fails unless Game Settings > Security > Studio API access is on.
@@ -44,11 +45,13 @@ Then read [[_Index]] (rules), [[Tasks]] and the newest entries in [[Log]].
 - **Other people edit Studio at the same time** (Ethan, his friend, other Claude sessions). Make targeted edits only; never overwrite a whole script you didn't just read.
 
 ## Current state (as of 2026-10-20 evening)
-- **Last commit:** `423ecf5` every spoken line voiced. Before it: `26e8a1c` + `815ed0e` school backpacks / coat hangers, `226f2d5` Studio-only Schooler/Library scripts exported to src, `7bce176` first-time tutorial, `62faa73` Closer arrives later, `32dd8b5` cleanup pass (gym chains, flags, thermostat, vending blackout, dev spawns), `4f4129f` gym exit doors, `a9c3a97` bug pass + glossy look, `75fc4b4` 17-point chore pass, `61026a0` Night Custodian is the Closer.
+- **Last commit:** `149fc4a` hiding fixes, 0.8-scale players, voice ids, CCTV Closer. Before it: `423ecf5` every spoken line voiced, `26e8a1c` + `815ed0e` school backpacks / coat hangers, `226f2d5` Studio-only Schooler/Library scripts exported to src, `7bce176` first-time tutorial, `62faa73` Closer arrives later, `32dd8b5` cleanup pass (gym chains, flags, thermostat, vending blackout, dev spawns), `4f4129f` gym exit doors, `a9c3a97` bug pass + glossy look, `75fc4b4` 17-point chore pass, `61026a0` Night Custodian is the Closer.
 - **Playable loop:** chores and the wing key, the Closer (Night Custodian model, menace phases, hunting, lockers), the Schooler (second monster, never in Wing 1), private scares and sanity, blackouts and the breaker, flashlight with batteries, 3-slot hotbar, 3D journal, first-time tutorial.
 - **Tutorial (new, 2026-10-20):** `TutorialService` (server) + `TutorialController` (client). Plays the first time a player is in Wing 1; finishing or skipping saves `TutorialDone` in DataStore `PlayerFlags_v1`; [H] replays it. 11 kid-friendly cards with HUD rings and world highlights. While it runs (`ReplicatedStorage.TutorialActive`) menace, Closer arrival, blackouts and scares pause and the flashlight doesn't drain. See [[Systems/UI]] and the newest [[Log]] entry.
 - **Journal:** held larger (fills most of the screen), hotbar + held item hide while open (`JournalOpen` attribute), bottom-right key hints.
 - **Closer timing:** first arrival needs menace >= 40 AND `Config.Closer.ArriveAfterSeconds` (150 s Wing 1 → 75 s Wing 8).
+- **Hiding (2026-10-20 late):** `HidePose` attribute: Locker = invisible to others, Desk = everyone sees a knee-hug pose. Players are 0.8 scale (Config.Characters.Scale). Avatars use AnimationConstraints (not Motor6Ds).
+- **CCTV:** feed figures are the real Night Custodian; 35% leap into the lens.
 - **Backpacks + voice (2026-10-20 evening):** school backpacks against walls / under desks / on coat hangers ([[Systems/Assets]]); every spoken line voiced, normal in the PA voice, creepy in a glitchy one ([[Systems/Voice]]).
 - **Look:** glossy materials via MaterialService overrides (CeramicTiles → GlossyVinylTile1, Plaster → GlossyPaintedPlaster) and `Lighting.EnvironmentSpecularScale` 1 / `EnvironmentDiffuseScale` 0.25. These live in the place file, not Git.
 - **Blackouts** also kill "powered props" (vending machines etc.) via `LightFx.powerProps`; the exit sign stays lit.
@@ -61,7 +64,6 @@ Then read [[_Index]] (rules), [[Tasks]] and the newest entries in [[Log]].
 - `models/school-backpack.glb` is untracked in the project folder (Ethan's file, left alone).
 
 ## What Ethan needs to do
-- **Upload `sounds/PAVoiceExtra.ogg` and `sounds/CreepyVoice.ogg`** (project folder) and give Claude the ids for `Config.Sounds.PAVoiceExtra` / `CreepyVoice`. Until then the phone call and the private PA scare stay silent. See [[Systems/Voice]].
 - **Save/publish the place** (tutorial scripts are in Git, but materials, assets and the Studio-only scripts above are only in the place).
 - Turn on **Game Settings > Security > Enable Studio Access to API Services**, or the tutorial shows every Studio session.
 

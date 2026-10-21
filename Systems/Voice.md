@@ -5,8 +5,8 @@ Every spoken line has audio. One Piper TTS voice (LibriTTS speaker 58) for every
 | Pack | File / Config.Sounds key | Lines module | What |
 |---|---|---|---|
 | PA | `sounds/PAVoice.ogg` / `PAVoice` | `PALines` | the 17 school PA announcements (PAService). Only rebuilt with `--pa` |
-| Extra | `sounds/PAVoiceExtra.ogg` / `PAVoiceExtra` | `PAExtraLines` | private PA scare normal lines (PA chain) + the phone caller's normal lines (telephone chain) |
-| Creepy | `sounds/CreepyVoice.ogg` / `CreepyVoice` | `CreepyLines` | creepy lines: same voice slowed/lowered, doubled by a drifting second voice, whisper layer, stutter, bit-crush bursts, dropouts, a reversed fragment (phone ones also through the telephone line) |
+| Extra | `sounds/PAVoiceExtra.ogg` / `PAVoiceExtra` (88268153417320) | `PAExtraLines` | private PA scare normal lines (PA chain) + the phone caller's normal lines (telephone chain) |
+| Creepy | `sounds/CreepyVoice.ogg` / `CreepyVoice` (84267249437395) | `CreepyLines` | creepy lines: same voice slowed/lowered, doubled by a drifting second voice, whisper layer, stutter, bit-crush bursts, dropouts, a reversed fragment (phone ones also through the telephone line) |
 
 - Play: `Shared/Voice.luau` -> `Voice.play(name, parent?, volume?)`, `Voice.get`, `Voice.find(text)` (phone questions are matched by their exact text, so changing a question's text in PhoneQuestions needs a re-render), `Voice.isCreepy`.
 - Normal vs creepy: normal = PA voice; creepy = anything the school says that is wrong ("...we can see you.", "Your shift is almost over.", the 6 creepy phone questions, "...Wrong.").

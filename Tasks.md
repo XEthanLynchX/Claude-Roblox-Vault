@@ -1,7 +1,8 @@
 # Tasks
 
 ## In progress
-- [ ] Ethan: upload sounds/PAVoiceExtra.ogg + sounds/CreepyVoice.ogg, then put the ids in Config.Sounds (PAVoiceExtra, CreepyVoice)
+- [ ] Playtest hiding with 2 players: locker player invisible to the other, desk pose looks right from outside, crawl in/out glides at the new 0.8 scale
+- [ ] Check the smaller (0.8) characters everywhere: doors, ladder chore, first-person body, jumpscare framing
 - [ ] Listen to the creepy voice in game and tune make_voices.py if it's too clean / too noisy
 - [ ] Playtest the tutorial with 2 players and on touch/gamepad
 - [ ] Set up the two-place experience (Lobby start place + Game place) and fill Config.Places.GamePlaceId
@@ -42,6 +43,7 @@
 - [ ] Lobby break room, Principal intro and voice lines
 
 ## Done
+- [x] Hiding fixes (locker invisible, desk knee-hug pose, no desk vignette), players at 0.8 scale, voice ids, the Closer on the CCTV feeds with a 35% leap at the lens (2026-10-20)
 - [x] Every spoken line voiced: phone caller + private PA scare, normal in the PA voice, creepy in a glitchy voice (2026-10-20)
 - [x] School backpacks replace the old ones: against walls, under desks, on coat hangers (2026-10-20)
 - [x] Export Studio-only Schooler/Library scripts (+ Studio DevService) to src, commit `226f2d5` (2026-10-20)
