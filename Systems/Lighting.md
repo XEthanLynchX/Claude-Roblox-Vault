@@ -56,3 +56,7 @@ Edit mode uses Studio's daylight. To preview: temporarily copy the scene setting
 ## Shadow budget (2026-10-18)
 - Only the nearest `ShadowLights` (5) pools cast shadows; lights past `LightCullDistance` (130) are off. See [[Systems/Performance]].
 - Low-mode flashlight: LowFlashBrightness 3, LowFlashEdgeBrightness 0.6, LowFlashThrowBrightness 2.
+
+## Materials (2026-10-20)
+- MaterialService base-material overrides: CeramicTiles -> GlossyVinylTile1, Plaster -> GlossyPaintedPlaster (generated with the Studio assistant, under MaterialService.AssistantMaterials). Every tile floor / plaster wall uses them without code changes. To undo: MaterialService:SetBaseMaterialOverride(material, "").
+- Lighting.EnvironmentSpecularScale = 1 (was 0.2) for the sheen; EnvironmentDiffuseScale = 0.25.

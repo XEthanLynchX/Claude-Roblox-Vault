@@ -25,6 +25,7 @@ New conversation? Read [[Handoff]] first: current state, how Claude works on the
 - [[Design/Scares]]: private scares (formerly anomalies)
 - [[Design/Setting]]: the school, wings and mood
 - [[Design/The Closer]]: the monster, its behavior and the kill jumpscare
+- [[Design/After Death]]: PLANNED, not built: taken players spectate through the CCTV cameras and can scare their friends every so often
 - [[Design/Monsters]]: 8 signature monsters, one per wing (rules, counterplay, model briefs)
 
 ## Systems

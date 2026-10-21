@@ -212,3 +212,6 @@ Decisions and end-of-session recaps, newest first.
 ## 2026-10-16
 - Chose co-op anomaly horror over a ROUNDS-like game (needs full lobbies, hard netcode) and a gambling game (Roblox rules ban playable simulated gambling).
 - Setting: a school. Core idea: private anomalies and hallucinations create doubt between friends.
+
+## 2026-10-21
+- Brainstormed what taken players do. Ethan chose: CCTV spectate + an occasional option to scare friends. Wrote [[Design/After Death]] (design only, not implemented, open questions listed).

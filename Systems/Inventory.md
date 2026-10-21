@@ -19,7 +19,13 @@ Built 2026-10-19. Server-authoritative 3-slot hotbar.
 - Dev command: `give <Kind>` (Broom, Vacuum, Plunger, Bulb, BatteryBox, Flashlight).
 
 ## Item kinds
-Flashlight, Broom, Vacuum, Plunger, Bulb (fluorescent tube), BatteryBox, TrashBag, WingKey.
+Flashlight, Broom, Vacuum, Plunger, Mop, Bulb (fluorescent tube), BatteryBox, TrashBag, WingKey (+ keys/book items added by the parallel session).
 
 ## Not verified yet
 - How the held items look in third person and in your own view (View/Hold offsets are first guesses; Studio screenshots don't work during a playtest). Tune in `Items.Defs`.
+
+## 2026-10-20
+- **Pivot gotcha:** `Items.make` gives models without a PrimaryPart their biggest part as PrimaryPart, which replaces the asset's own pivot. Broom, Mop and Plunger set `KeepPivot = true` so the pivot stays at the top of the handle (head along +Y); their Hold/View turn them head-down (`Angles(pi + lean)`).
+- Drops: floor ray respects CanCollide, then the model is lifted/lowered so its lowest point sits on the floor.
+- ToolAnim.luau: other players' right shoulder/elbow get an extra turn each frame (layered on the animator) for `ToolAction` Broom/Vacuum/Mop and `ToolStroke` plunges; your own view model gets `ToolAnim.ViewOffset(kind)`.
+- Tool spots in the custodian room lean the long tools against the wall (WingBuilder `leaning`).

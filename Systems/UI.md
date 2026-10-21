@@ -23,3 +23,17 @@ Code: `src/client/Controllers/UiTheme.luau` (colors, fonts, tween timings, helpe
 - **Flashlight battery:** battery icon bottom right (5 cells, nub), spare batteries as small pips beside it (up to MaxSpareBatteries). Low (<20%): cells red, outline blinks. Empty: DEAD blinks in the casing. "[R] SWAP BATTERY" pulses when low and you have a spare. The whole gauge dims (CanvasGroup) while the flashlight is put away.
 - **Hotbar:** dark plates, amber outline + amber bar under the selected slot, typewriter item names.
 - All three scale with the screen (UiTheme.fitToScreen, designed at 1280x720).
+
+## Interact prompts (PromptUi.luau, 2026-10-20)
+- Every ProximityPrompt is switched to Style = Custom on the client and drawn as a plate on one ScreenGui ("Prompts"), moved over its object each frame. BillboardGuis did not render in testing, so don't go back to them.
+- Look: dark steel key cap with the key letter (TAP on touch, button name on gamepad), dried-blood fill rising over HoldDuration, red flash when it fires; object text small caps over the action in typewriter; red rule; dark smudge behind the words; text flickers now and then; fades in/out as one.
+- Attributes: `LookAt` (degrees) = only shown while looking at it; `MopSpill` = hidden while the mop is in hand.
+
+## Side tasks
+- `SIDE` kinds in Minigames (Plunge) open as a 250-wide panel on the right edge: no dim backdrop, mouse stays locked, the held tool stays in view (`TaskKind` player attribute tells HotbarController).
+
+## Tutorial (TutorialController)
+- ScreenGui "Tutorial" (DisplayOrder 140): CanvasGroup steel card 740x230 at top (fitToScreen), title + body (18pt), key caps, step dots, Next / Skip buttons (named), pulse ring that follows a HUD element (positioned relative to gui.AbsolutePosition), AlwaysOnTop amber Highlights in CurrentCamera for world things.
+- Mouse is freed for the whole tutorial except while the journal is open.
+- Steps are a data table (Title, Body, Keys, Wait, WaitText, Ui, World, OnEnter) — add a card by adding a row.
+- Journal open: player attribute JournalOpen; JournalBook.IsOpen()/Spread() exposed for the tutorial.

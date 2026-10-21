@@ -23,7 +23,7 @@
 - [ ] Upload new sounds (MusicBox, Drone, Tension, Chase, JumpScream, JumpHit, Tinnitus, Static) and paste ids in Config.Sounds
 - [ ] Playtest the door peek (lean direction / head poking past the frame)
 - [ ] Revive (Robux / ad, once per run) for taken players
-- [ ] Spectate view for taken players
+- [ ] Spectate view for taken players: now designed as CCTV camera spectate + occasional scare option, see [[Design/After Death]] (design only, wait for Ethan's go)
 - [x] Remove the door vote / loop service
 - [ ] Playtest: is splitting up + scares fun?
 

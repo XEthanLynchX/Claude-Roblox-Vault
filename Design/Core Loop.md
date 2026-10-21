@@ -50,7 +50,7 @@ You can't move while doing one (you're exposed). W/A/S/D or X backs out; walking
 - Shown only on the Staff Wellness Monitor in the custodian room. Elsewhere, hints: color loss, heavier breathing, footsteps out of sync.
 
 ## The Closer
-- See [[Design/The Closer]]. Takes players; taken players return as ghosts only one living player can see.
+- See [[Design/The Closer]]. Takes players; taken players spectate through the CCTV cameras and can scare their friends (planned, see [[Design/After Death]]; replaces the old ghost idea).
 - Run ends when everyone is taken.
 
 ## Coins and progress
