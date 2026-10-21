@@ -219,3 +219,4 @@ Decisions and end-of-session recaps, newest first.
 - Added rule: players always respawn with a flashlight ([[Design/After Death]] decision 8). Not implemented.
 - Map rework: generated grid hallways, baked school surfaces (halls, bathrooms, ceilings), library wing off. Commit `a58c817`. [[Systems/Map]]
 - Classrooms got the classroom-floor-wall.glb look (speckled VCT floor, cream block walls, tan base, popcorn ceiling). [[Systems/Map]]
+- Dimmer hallway lights (half of room lights), thicker dark fog and smaller dark-adjust glow so you see less far in the dark. [[Systems/Lighting]]

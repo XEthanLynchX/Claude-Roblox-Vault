@@ -60,3 +60,8 @@ Edit mode uses Studio's daylight. To preview: temporarily copy the scene setting
 ## Materials (2026-10-20)
 - MaterialService base-material overrides: CeramicTiles -> GlossyVinylTile1, Plaster -> GlossyPaintedPlaster (generated with the Studio assistant, under MaterialService.AssistantMaterials). Every tile floor / plaster wall uses them without code changes. To undo: MaterialService:SetBaseMaterialOverride(material, "").
 - Lighting.EnvironmentSpecularScale = 1 (was 0.2) for the sheen; EnvironmentDiffuseScale = 0.25.
+
+## Darker halls (2026-10-21)
+- Hallway fixtures shine at `Config.Lighting.HallLightScale` (0.5) of the room lights: WingBuilder tags hall PointLights with attribute `Hall`, LightFx scales them (live-tunable via LightingTuning).
+- Shorter view distance in the dark (place file, Lighting): Atmosphere Density 0.72 (was 0.32), Haze 2.8 (was 1.2), Color (16,18,24), Decay (8,9,12); DarkGamma brightness 0.012 (was 0.035). Far hallway fades to black after roughly 40 studs.
+- Eyes-adjust glow with the flashlight off: `Config.Flashlight.EyesAdjustRange` 9 (was 16), `EyesAdjustBrightness` 0.25 (was 0.4).
