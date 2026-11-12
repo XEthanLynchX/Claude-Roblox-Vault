@@ -1,5 +1,7 @@
 # Decisions (pre-development, 2026-10-16)
 
+> **Redesign, 2026-11-10:** see [[Design/Redesign Plan]] → Decisions. It changes: 8 wings → 5, renamed "5 Wings Until Dawn", chores are shared, one School Rule per wing, players keep 0.8 bodies but get a raised eye height, taken players drop an ID badge and nobody can take the wing key until every badge is picked up (no more free return each wing); rules are taught the Doors way, with death-screen hints, spectating follows friends, and the full camera network moves to a Security Desk for living players. Lines below that conflict are replaced once each phase is built.
+
 ## Core rules
 - **Main objective (changed 2026-10-16):** finish the wing's **janitor chore list** to get the key to the next wing. See [[Design/Core Loop]]. Anomaly-spotting and door voting are **dropped** as the main objective (playtest: not fun as the core).
 - **Anomalies → Scares:** anomalies are now private scares and loud noises one player experiences while friends go "what are you talking about?". See [[Design/Scares]].

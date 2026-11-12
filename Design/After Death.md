@@ -1,5 +1,7 @@
 # After Death: CCTV spectate + scaring friends
 
+> **2026-11-10:** partly replaced by [[Design/Redesign Plan]] (Phases 4, 5, 6): spectate follows friends by default, cameras are filtered to the ones near friends, the full camera network becomes the Security Desk, and ID badges add an in-game rescue. Note the after-death shop and CCTV spectate have since been built (`AfterDeathService`, `SpectateController`).
+
 Status: **DESIGN ONLY, NOT IMPLEMENTED** (decided 2026-10-21). Do not build until Ethan says go.
 Replaces the old line "taken players return as ghosts only one living player can see" ([[Design/Core Loop]], [[Design/The Closer]]).
 

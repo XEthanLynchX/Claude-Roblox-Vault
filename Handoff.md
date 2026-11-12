@@ -4,7 +4,7 @@ Read this first when picking the project up in a new conversation. Updated 2026-
 Then read [[_Index]] (rules), [[Tasks]] and the newest entries in [[Log]].
 
 ## Where things are
-- **Project folder:** `Documents/8 Wings Til Dawn` (Rojo + VS Code + Git). Rojo syncs only `src`:
+- **Project folder:** `Documents/GitHub/8-Wings-Til-Dawn` (Rojo + VS Code + Git; GitHub `XEthanLynchX/8-Wings-Til-Dawn`). (Older notes say `Documents/8 Wings Til Dawn`.) **2026-11-10:** src was re-exported from Studio in full (commit `a02b0e2`); see [[Log]]. Rojo syncs only `src`:
   - `src/shared` → ReplicatedStorage.Shared
   - `src/server` → ServerScriptService.Server
   - `src/client` → StarterPlayerScripts.Client

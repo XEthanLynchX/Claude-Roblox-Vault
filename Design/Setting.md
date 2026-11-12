@@ -3,15 +3,8 @@
 - Players are overnight janitors. Around 2 a.m. the hallway starts looping.
 - Mood: fluorescent lights, waxed floors, quiet hum, emergency exit signs.
 
-## Wings (one signature monster each, see [[Design/Monsters]])
-1. Main Hall: The Hall Monitor
-2. Gym: The Mascot
-3. Cafeteria: The Lunch Lady
-4. Library: The Overdue
-5. Science Wing: The Specimen
-6. Music & Auditorium: The Conductor
-7. Nurse's Office & Basement: The Nurse
-8. Principal's Office (finale): The Principal
+## Wings (2026-11-10)
+- **5 wings** ("5 Wings Til Dawn"). All built by the same generator with the same room types; no per-wing themes (Ethan). Each wing has one headline School Rule, and the wings feel different through light, hall dressing, layout size, mess and random conditions/events. See [[Design/Redesign Plan]] and [[Design/Monsters]].
 
 ## Room themes (randomized per room)
 - Classroom (most common): desks (chairs sometimes stacked up for the night), bookshelf, globe, flag, plant, posters

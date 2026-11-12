@@ -18,6 +18,7 @@ New conversation? Read [[Handoff]] first: current state, how Claude works on the
 - **Core loop:** Read the chore list → split up and work → get the wing key → exit together → next of 8 wings
 
 ## Design
+- **[[Design/Redesign Plan]]: the November 2026 redesign in 18 phases (5 wings, shared chores, School Rules, ID badges + Lost & Found, spectate rework, eye height, gloved first-person hands, batteries, tool/item fixes, close calls incl. the Interrogation, wing variety). Say "work on Phase N".**
 - [[Design/Decisions]]: every settled decision (rules, scope, money, launch). Read this first.
 - [[Systems/Chores]]: how every chore plays now
 - [[Design/Core Loop]]: chores, key, pressure, sanity
@@ -27,6 +28,7 @@ New conversation? Read [[Handoff]] first: current state, how Claude works on the
 - [[Design/The Closer]]: the monster, its behavior and the kill jumpscare
 - [[Design/After Death]]: PLANNED (design settled), not built: taken players spectate through the CCTV cameras and can scare their friends every so often
 - [[Design/Monsters]]: 8 signature monsters, one per wing (rules, counterplay, model briefs)
+- [[Design/Thumbnails]]: the 4 store thumbnails (what each shows, upload steps, the Blender file and how to re-render)
 
 ## Systems
 - [[Systems/Conventions]]

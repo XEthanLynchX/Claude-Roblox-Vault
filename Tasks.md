@@ -1,5 +1,8 @@
 # Tasks
 
+## Redesign (2026-11-10)
+- [ ] Work through [[Design/Redesign Plan]] phase by phase (its tracker is the source of truth). Suggested order: 2 (done), 12, 14, 3, 13, 1, 6, 4, 5, 7, 8, 9, 15, 16, 10, 11, 17, 18.
+
 ## In progress
 - [ ] Playtest the generated wings: walking distances with 1.5x map (chore timers?), light/shadow budget (~57 hall lights), CCTV chore with 6-9 cameras, Schooler wing
 - [ ] Playtest hiding with 2 players: locker player invisible to the other, desk pose looks right from outside, crawl in/out glides at the new 0.8 scale

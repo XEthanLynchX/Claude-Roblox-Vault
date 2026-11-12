@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Design/Monsters.md",
+                "file": "Design/Redesign Plan.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Monsters"
+              "title": "Redesign Plan"
             }
           }
         ]
@@ -190,11 +190,12 @@
   },
   "active": "8cd871ef2860b406",
   "lastOpenFiles": [
+    "Design/Monsters.md",
+    "Design/Redesign Plan.md",
     "Design/Decisions.md",
     "Design/Core Loop.md",
     "Design/Setting.md",
     "Handoff.md",
-    "Design/Monsters.md",
     "Systems/Performance.md",
     "Systems/Lighting.md",
     "Systems/Conventions.md",

@@ -2,6 +2,14 @@
 
 Server: `src/server/Services/ChoreService.luau` (prompts, list, completion). Task screens: `src/client/Controllers/Minigames.luau`. Tuning: `Config.ChoreTuning` and `Config.Minigames.MinSeconds` (anti-cheat).
 
+## Shared chores (2026-11-10, Redesign Phase 2)
+- **Nobody owns a chore.** Every prompt shows for everyone; `assignTo` stays nil in `ChoreService.Setup` (the 2026-10-22 ownership code is still there, unused).
+- **"Sam is on it":** whoever works on a chore stamps it (`ActiveBy` name, `ActiveById`, `ActiveAt` server time) through `touch()`: minigame start, taking the trash bag, mopping, vacuum hold, a tube put in, a chair put up, the phone answered, a battery box stocked, cameras, plunger, clocks. Other players' HUD shows "· Sam is on it" for 30 s after the last touch (`ACTIVE_SECONDS` in ChoreService and HudController; the HUD re-checks every 5 s). Finishing clears it. The TitleService "Chores" stat goes to the last player who touched it.
+- **Tools:** one copy per crew member, placed the first time any chore needs that tool (`crewSize` = the crew at Setup).
+- **Losing a player** (taken / left / AFK) shrinks the list: `floor(remaining / (living + 1) × 0.5)` unstarted chores come off (0.75 when one player is left), chores someone is on right now are kept, once per player per wing (`shrinkFor`). `Reassign` (taken) messages the crew; `RemovePlayer` (left/AFK) returns the count for WingService/AfkService's messages. `Reclaim` does nothing now.
+- The Closer's new spills (`AddSpill`) are everyone's too.
+- Not done yet: the intro's voice line TutChores still says "Each of you gets your own chore list" (needs new audio; Phase 14). Tuning (`Config.Chores` Base 5, +2 per extra player, Max 12) still needs a 2-player playtest.
+
 ## The list (per wing)
 Newer and classic chores alternate (2 newer, 1 classic). Newer: Phone, Bulbs, Chairs, Vacuum, Graffiti, Plunger, Clocks, Monitor, Restock. Classic: Trash x2, Spill x2, Board, Rewire, Thermostat, Sink.
 "Hold the ladder" (ladderChore) is out of the mix since 2026-10-20 (Ethan asked); the code is kept.

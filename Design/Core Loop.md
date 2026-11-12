@@ -2,7 +2,7 @@
 
 ## Per wing (8–12 minutes)
 1. **Clock in:** the Principal's clipboard lists this wing's chores (also the re-readable note).
-2. **Split up and work:** players spread out to finish chores. More players = more chores, scaled so solo stays doable.
+2. **Split up and work:** the chore list is shared (anyone can do any chore; "Sam is on it" shows who's working on what). Players spread out to finish it. More players = more chores, scaled so solo stays doable.
 3. **Get the key:** when the list is done, the wing key appears (e.g. in the custodian closet or the Principal's office).
 4. **Exit together:** unlock the door to the next wing. Players who aren't at the door when it opens are left behind briefly, and the Closer notices.
 
