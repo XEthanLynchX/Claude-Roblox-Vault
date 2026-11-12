@@ -3,6 +3,8 @@
 Decisions and end-of-session recaps, newest first.
 
 ## 2026-11-12
+- Ethan: everything that says 8 Wings Til Dawn (voice lines, art, text) changes to 5 Wings Til Dawn. Phase 1 step 6 is now a full rename sweep: code text, voice packs, repo art, place-file text and images, the Creator Dashboard, the vault.
+- Vault reorganised: START HERE `_Index`, new [[Systems/Workflow]] (Rojo first, MCP for the rest, end-of-chat sync rule) and [[Systems/Code Map]]; Handoff and Tasks rewritten; October log, old tasks and old handoff moved to `Archive/`.
 - Ethan: players get batteries at the start of every wing. Added to Phase 12: full flashlight + 1 spare, capped at 3 (`Config.Flashlight.StartSpares`), also on returns through a badge, the Lost & Found or a revive.
 
 ## 2026-11-10 (Ethan answered all 21 open questions)

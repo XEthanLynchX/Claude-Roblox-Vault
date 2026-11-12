@@ -19,7 +19,7 @@ Sizes: **S** = one session, **M** = 1–2 sessions, **L** = 2–3+ sessions.
 ## Tracker
 | #      | Phase                                                                              | Size | Needs first |
 | ------ | ---------------------------------------------------------------------------------- | ---- | ----------- |
-| [ ] 1  | Five wings, the name, remove the Schooler                                          | M    | —           |
+| [ ] 1  | Five wings, rename everything to 5 Wings Til Dawn, remove the Schooler             | M    | —           |
 | [x] 2  | Shared chores (built 2026-11-10; 2-player test + TutChores voice line still to do) | M    | —           |
 | [ ] 3  | Eye height: players stay small, the view doesn't                                   | S–M  | —           |
 | [ ] 4  | Spectate friends (follow cam + nearby cameras)                                     | M    | —           |
@@ -129,12 +129,18 @@ Build:
 3. **Remove the Schooler** (Ethan: it's broken). Delete `SchoolerService`, `SchoolerFx` and `Config.Schooler`, and its model in ServerStorage (`TheSchooler`, moved to `ServerStorage.AssetBackups` first, then deleted once a playtest is clean). Remove every reference: WingService (Start / NewWing / Dawn / onTaken), the dev menu buttons (`schooler_*`), Sounds (`Schooler*`), Movement / MusicController / ScareDirector / LibraryService if they mention it. The Blackthorn Library level was its level and stays off. Grep `Schooler` until nothing is left.
 4. Old host saves: `HostSave` already clamps a saved wing to `WingCount`, so a save on wing 6–8 loads wing 5. Test it.
 5. Text and voice: `TutorialLines.TutEight` ("There are eight wings…") needs a new line and new audio (`tools/make_voices.py`; Ethan uploads it, then the id goes in `Config.Sounds`). Change the Lore line "Counted the wings on the map. Eight. I walked nine." to "Five. I walked six." Check the shift board's wing strip lays out well with 5 boxes. The journal's "Wing n of N" and DawnService already follow `WingCount`.
-6. **Rename to "5 Wings Til Dawn":** lobby title (`LobbyClient`, `BreakRoom` sign), kick messages (`CrewService`, `AfkService`), the lobby graphics note, the game's name and description on the Creator Dashboard, and this vault's titles. (Thumbnails wait for launch; Ethan picks them.)
+6. **Rename everything to "5 Wings Til Dawn"** (Ethan, 2026-11-12: *anything* that says 8 Wings Til Dawn, or eight wings, changes: voice lines, art and text). Sweep every place it can hide:
+   - **Code text:** grep the whole repo (case-insensitive) for `8 wings`, `eight wings`, `8 WINGS`, `wing 8`, `of 8`, `eight` and fix every hit: the lobby title (`LobbyClient`), the `BreakRoom` sign, kick messages (`CrewService`, `AfkService`), the lobby graphics note, journal and shift-board text, Lore pages, tutorial and PA subtitles, comments that state the wing count.
+   - **Voice lines:** any line that says "eight" or the old name gets re-recorded: `TutEight` ("There are eight wings…"), and anything else found by grepping `PALines`, `PAExtraLines`, `CreepyLines`, `HuntLines`, `TutorialLines` and the source text in `tools/make_voices.py` / `tools/make_pa.py`. Regenerate the packs, Ethan uploads them, the new ids go in `Config.Sounds`, and the time ranges are updated.
+   - **Art and textures in the repo:** `marketing/`, `textures/`, `models/` and the `.blend` files. Anything with the title or an "8" logo on it (signs, posters, banners, decals, the journal cover) is re-made with the new name. List every file found.
+   - **Art in the place file** (not in Git): search every SurfaceGui / TextLabel / BillboardGui text and every Decal / Texture / ImageLabel in Workspace, ReplicatedStorage.Assets, ServerStorage and StarterGui through the MCP. Text is fixed directly; images that show the old title are listed for Ethan to replace (uploads are his).
+   - **Roblox side (Ethan):** the experience name, description and icon on the Creator Dashboard, plus Developer Product, Game Pass and badge names or descriptions that mention it. Thumbnails: Ethan picks new ones at launch, and none may show the old name.
+   - **Vault:** note titles and text that still say 8 Wings Til Dawn (history in the Log and Archive stays as it was).
 
 Done when:
 - [ ] A solo run reaches dawn after wing 5.
 - [ ] A host save made on wing 7 loads on wing 5.
-- [ ] No "eight" left in text or voice (grep `[Ee]ight`, `8 Wings`).
+- [ ] No "8 Wings Til Dawn" or "eight wings" left anywhere: code text, voice lines, repo art, place-file text and images, the Creator Dashboard (Ethan), current vault notes. Grep results and the place-file search are pasted into the Log entry as proof.
 
 ## Phase 2: Shared chores
 **Goal:** anyone can do any chore. The crew finishes the list together and faster, and one slow or AFK player can't hold the wing back.
