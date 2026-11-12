@@ -64,7 +64,7 @@ Ethan's calls, plus Claude's recommendations marked **(default)**. A default sta
 - **Spectating.** Taken players follow their friends by default (Q/E to switch). The camera view shows only the cameras near living friends. The full camera network moves into the living game as the **Security Desk** in the main office.
 - **The New Hire doesn't kill** (Ethan, 2026-11-10): its lunge is a jumpscare, sanity −30, and the Closer is called in to hunt you right away. The Closer stays the only thing that takes players.
 - **Hands in first person** (Ethan, 2026-11-10): you see a pair of hands holding the flashlight, the journal and every hotbar item. Default: **janitor viewmodel arms** (navy work-shirt sleeves and worn work gloves) instead of your avatar's real arms. Avatars vary too much (packages, accessories, the 0.8 scale) and real arms clip the camera. Other players still see your real avatar holding things, as now. If the real arms look fine in a test, they can be used instead.
-- **Batteries stay a coin/Robux item, but running out can't mean blindness** (Ethan, 2026-11-10). The charger chore gives one spare battery per player present. Batteries are easier to find, and a dead flashlight can still be shaken for a few seconds of weak, noisy light. See Phase 12.
+- **Batteries stay a coin/Robux item, but running out can't mean blindness** (Ethan, 2026-11-10). Every player starts each wing with batteries (Ethan, 2026-11-12). The charger chore gives one spare battery per player present. Batteries are easier to find, and a dead flashlight can still be shaken for a few seconds of weak, noisy light. See Phase 12.
 - **More close calls** (Ethan, 2026-11-10): more moments where the Closer *almost* gets you and you can still survive with a skill check or a hard choice, like the locker skill check. The first is Ethan's **Interrogation**: it grabs you and demands you give up a friend. See the Close calls section and Phases 15–16.
 - **The Schooler is removed** (Ethan, 2026-11-10: "it's broken and doesn't work"). The Closer is the only monster until each School Rule gets its own (below). Done in Phase 1.
 - **Monsters = rules** (Ethan, 2026-11-10): the old 8-monster plan is replaced. Only the five monsters tied to the School Rules stay in [[Design/Monsters]] (Principal, Overdue, Hall Monitor, Lunch Lady, Specimen); each will later replace its rule's stand-in. The rest were removed.
@@ -323,6 +323,7 @@ Done when:
 **Touches:** `src/shared/Config.luau` (Flashlight, ChoreTuning), `ChoreService` (restockChore), `WingService` (battery placement), `src/client/Controllers/Flashlight.luau`, `Props.Battery`, `NoiseService`.
 
 Build:
+0. **Batteries at the start of every wing** (Ethan, 2026-11-12): when a wing starts, and when you come back through a carried badge, the Lost & Found or a revive, your flashlight is full and you get **+1 spare battery**, up to `MaxSpareBatteries` (3). The amount is `Config.Flashlight.StartSpares = 1`, applied where WingService's `buildWing` resets each player (next to `SanityService.Reset`). Tune it with the pickups below so batteries stay worth buying.
 1. **Charger = one battery per player present** (Ethan's ask). When the charger is stocked, it holds as many spares as there are players in the server at that moment (taken players count, so they get one when they're back). Each player can take **one**, so nobody hoards the crew's batteries. The prompt says "Take your battery (3 left)".
 2. **Batteries are findable:**
    - more of them: `BatteriesPerWing` 2 → 3, and `BatteriesPerExtraPlayer` 0.5 → 1;
@@ -334,6 +335,7 @@ Build:
 6. Low graphics mode: check that shake and eye-adjust still look right (`LowEyesAdjustScale`).
 
 Done when:
+- [ ] Every player starts each wing with a full flashlight and +1 spare (never above 3).
 - [ ] A 4-player crew finds about 5 batteries per wing plus 4 from the charger.
 - [ ] With an empty flashlight you can still get from the far hall to the custodian room using shake + eyes adjust.
 - [ ] The battery offer still appears when you're nearly flat.

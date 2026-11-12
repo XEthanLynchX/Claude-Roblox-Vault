@@ -1,46 +1,43 @@
-# 8 Wings Til Dawn: Index
+# 5 Wings Til Dawn: START HERE
 
-Start here. One line per area; details live in the linked notes.
-New conversation? Read [[Handoff]] first: current state, how Claude works on the project, next steps.
+(Formerly *8 Wings Til Dawn*; renamed 2026-11-10, rename in the game happens in Redesign Phase 1.)
 
-## Rules for Claude (always follow)
-- **Open this vault at the start of every session** (Ethan's rule, 2026-10-19): read this index and [[Handoff]] before doing any work on the project.
-- **Write it down:** anything relevant for future conversations (decisions, changes, systems, setup, gotchas) goes into this vault, every time (Ethan's standing rule, 2026-10-18).
-- **Never use low-poly assets.** When inserting or sourcing any object for the game (Creator Store, Toolbox, generated meshes), only use detailed, realistic models. No low-poly, blocky or stylized-simple assets, ever (Ethan's rule, 2026-10-19). See [[Systems/Assets]] → Where art comes from.
-- **Toolbox models:** check every imported model for scripts before using it; strip anything that isn't visual. See [[Systems/Assets]] → Toolbox safety.
-- **New 3D model (.glb) from Claude Design?** Before Ethan imports it, run `python tools/glb_colorize.py models/` in `Documents/8 Wings Til Dawn`. It bakes material colors into a texture so Roblox doesn't import it white. Ethan imports the `*_roblox.glb` copy. Details: [[Systems/Assets]].
-- Lighting must be **LightingStyle = Realistic** (newer Studio has no Technology/Future setting).
-- Code changes: compile-check with luau-compile (not installed on the linked computer as of 2026-10-18; a Studio playtest with no errors is the check), then git commit in the project folder. Git from Claude's shell can leave `.lock` files in `.git`: move them aside (`mv .git/HEAD.lock .git/stale-HEAD.lock`) or Ethan's git will fail with "File exists".
+## Every session, in this order
+1. This page → [[Handoff]] (where things stand and what's next) → the newest entry in [[Log]].
+2. [[Systems/Workflow]]: how to work. **Rojo first for code** (edit `src`, Rojo syncs into Studio); **the Studio MCP for everything else** (playtests, checking Studio, models, lighting, assets).
+3. The note for the task: a phase in [[Design/Redesign Plan]], or a system note below. Use [[Systems/Code Map]] to find the script before searching.
 
-## Concept
-- **Pitch:** Co-op horror (solo to 4 players). Overnight janitors finish their chore list in each of 8 school wings before dawn, while the Closer hunts them and the school scares each of them differently.
-- **Genre:** Co-op objective horror; private scares create doubt between friends
-- **Core loop:** Read the chore list → split up and work → get the wing key → exit together → next of 8 wings
+## Ethan's standing rules (always)
+- **Write it down:** decisions, changes, systems, setup and gotchas go in this vault, every time (2026-10-18).
+- **Rojo first** for code; the Studio MCP for anything Rojo can't do. No computer use when the MCP can do it (2026-11-12, 2026-10-29).
+- **End of every chat: Studio and `src` must match** (2026-11-12). Before the last reply, run the sync check in [[Systems/Workflow]] → End of every chat. Anything changed only in Studio gets exported to `src` and committed; nothing is left only in Studio.
+- **Never use low-poly assets.** Only detailed, realistic models from any source (2026-10-19). See [[Systems/Assets]].
+- **Toolbox models:** check every import for scripts and strip anything that isn't visual. See [[Systems/Assets]].
+- **New .glb from Claude Design / Blender:** run `python tools/glb_colorize.py models/` in the repo first; Ethan imports the `*_roblox.glb` copy.
+- **Ethan does 3D imports and asset uploads himself.** Claude prepares the files and says what to upload.
+- Lighting must stay **LightingStyle = Realistic**.
 
-## Design
-- **[[Design/Redesign Plan]]: the November 2026 redesign in 18 phases (5 wings, shared chores, School Rules, ID badges + Lost & Found, spectate rework, eye height, gloved first-person hands, batteries, tool/item fixes, close calls incl. the Interrogation, wing variety). Say "work on Phase N".**
-- [[Design/Decisions]]: every settled decision (rules, scope, money, launch). Read this first.
-- [[Systems/Chores]]: how every chore plays now
-- [[Design/Core Loop]]: chores, key, pressure, sanity
-- [[Design/Objective Brainstorm]]: why chores became the main objective
-- [[Design/Scares]]: private scares (formerly anomalies)
-- [[Design/Setting]]: the school, wings and mood
-- [[Design/The Closer]]: the monster, its behavior and the kill jumpscare
-- [[Design/After Death]]: PLANNED (design settled), not built: taken players spectate through the CCTV cameras and can scare their friends every so often
-- [[Design/Monsters]]: 8 signature monsters, one per wing (rules, counterplay, model briefs)
-- [[Design/Thumbnails]]: the 4 store thumbnails (what each shows, upload steps, the Blender file and how to re-render)
+## What the game is
+Co-op horror, solo to 4 players. Overnight janitors clear a shared chore list in each of **5** school wings before dawn while the Closer hunts them; each wing adds a School Rule to learn. Full plan: [[Design/Redesign Plan]].
 
-## Systems
-- [[Systems/Conventions]]
-- [[Systems/Night Custodian Model]]: the Blender model, rig and 4 animations of the Night Custodian
-- [[Systems/UI]]: the UI look (palette, task screens, HUD gauges) and UiTheme
-- [[Systems/Inventory]]: the 3-slot hotbar (items, flashlight slot, drop)
-- [[Systems/Map]]: generated grid hallways (wing layout rules) and the baked school surfaces
-- [[Systems/Assets]]: how to swap in real 3D models (asset slot names, placement rules)
-- [[Systems/Music]]: the score layers, the PA waltz from the ceiling speakers, the HuntDread chase
-- [[Systems/Voice]]: every voice line, the three voice packs, normal vs creepy voice
-- [[Systems/Lighting]]: ceiling light pools, flashlight beam, join fade
-- [[Systems/Performance]]: measuring FPS, shadow budget, prop lightening, heavy assets
+## Map of the vault
+**Now**
+- [[Design/Redesign Plan]]: **the current work**, 18 phases with a tracker. "Work on Phase N" means this note.
+- [[Handoff]]: current state, next step, what's waiting on Ethan.
+- [[Tasks]]: Ethan's to-dos and things outside the plan.
+- [[Log]]: what happened each session, newest first.
 
-## Tracking
-- [[Tasks]] · [[Log]]
+**How to work**
+- [[Systems/Workflow]]: session checklist, Rojo + MCP, playtest recipes, committing, machines.
+- [[Systems/Code Map]]: every script, one line each.
+- [[Systems/Conventions]]: code style and Studio settings.
+
+**Design** (what the game should be)
+- [[Design/Decisions]]: every settled decision (the redesign overrides older lines).
+- [[Design/Core Loop]] · [[Design/Setting]] · [[Design/The Closer]] · [[Design/Monsters]] (the five rule monsters) · [[Design/Scares]] · [[Design/After Death]] · [[Design/Thumbnails]] · [[Design/Objective Brainstorm]] (history)
+
+**Systems** (how it's built now)
+- [[Systems/Chores]] · [[Systems/Inventory]] · [[Systems/Map]] · [[Systems/Lighting]] · [[Systems/UI]] · [[Systems/Music]] · [[Systems/Voice]] · [[Systems/Assets]] · [[Systems/Night Custodian Model]] · [[Systems/Performance]]
+
+**Archive** (history; check before trusting)
+- [[Archive/Log 2026-10]] · [[Archive/Tasks pre-redesign]] · [[Archive/Handoff 2026-10-21]]

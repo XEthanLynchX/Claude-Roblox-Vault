@@ -13,7 +13,8 @@
 - **Edit-mode testing:** Studio caches required ModuleScripts in edit mode, so after Rojo syncs a change, a `require` from the command bar/plugin can return the OLD module. Build previews from fresh clones (copy Props + Materials into a temp folder and point a cloned WingBuilder at it), or test in Play mode.
 - **Team Create + Rojo:** only one person can sync at a time (Rojo's sync lock). The other pushes code through Git; the syncing person pulls.
 
-## Rojo sync rule (2026-10-19)
+## Rojo sync rule (2026-10-19, replaced 2026-11-12)
+> **Replaced by Rojo-first** ([[Systems/Workflow]]): code is written in `src` and Rojo syncs it into Studio. The rule below only applies when Claude has to fall back to editing in Studio.
 - Rojo makes Studio match the files in `src`. Any script edited only in Studio is overwritten by the next sync. That is what "reverted" the night session's work once.
 - Claude edits scripts in Studio (through the MCP tools), so **at the end of every change Claude copies the changed scripts back into `src`, checks that every script's hash matches, and commits.** Only then is a sync safe.
 - Before Ethan syncs: ask "is src up to date?" or check that `git status` is clean and the newest commit has the work.
